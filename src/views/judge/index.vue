@@ -10,7 +10,7 @@
 import { Group, Cell } from 'vux'
 
 export default {
-  name:'judge',
+  name: 'judge',
   components: {
     Group,
     Cell
