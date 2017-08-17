@@ -1,50 +1,100 @@
 <template>
   <div class="judge">
-    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+    <x-header>考评系统</x-header>
+    <swiper auto>
+      <swiper-item  class="swiper-demo-img" v-for="(item, index) in demo01_list" :key="index">
+        <img :src="item.imgUrl">
+      </swiper-item>
+    </swiper>
+    <el-input placeholder="输入关键字进行查询" v-model="filterText"></el-input>
+  
+    <el-tree class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode" ref="tree2" accordion highlight-current @node-click="handleNodeClick">
+    </el-tree>
+    
+    
+  
+    <!-- <img :src="imgUrl">
+    <img src="../../assets/images/1.jpg" alt=""> -->
   </div>
 </template>
 
 <script>
-import { Group, Cell } from 'vux'
+import { XHeader, Swiper, SwiperItem } from 'vux'
+import Router from 'vue-router'
 
 export default {
   name: 'judge',
   data() {
     return {
+      // imgUrl: '../../assets/log.png',
+      demo01_list: [
+        {imgUrl:require('assets/images/1.jpg')},
+        {imgUrl:require('assets/images/2.jpg')},
+        {imgUrl:require('assets/images/3.jpg')}
+      ],
+      filterText: '',
       data: [{
-        label: '一级 1',
-        children: [{
-          label: '二级 1-1',
-          children: [{
-            label: '三级 1-1-1'
-          }]
-        }]
+        id:'1',
+        label: '团委',
+        children: [
+          { id:'2',label: '刘丽丽' },
+          { id:'2',label: '伍婷' }
+        ]
       }, {
-        label: '一级 2',
-        children: [{
-          label: '二级 2-1',
-          children: [{
-            label: '三级 2-1-1'
-          }]
-        }, {
-          label: '二级 2-2',
-          children: [{
-            label: '三级 2-2-1'
-          }]
-        }]
+        id:'1',
+        label: '学生处',
+        children: [
+          { id:'2',label: '杨奕' },
+          { id:'2',label: '张子安' },
+          { id:'2',label: '袁惠莉' },
+          { id:'2',label: '谷敏' },
+        ]
       }, {
-        label: '一级 3',
-        children: [{
-          label: '二级 3-1',
-          children: [{
-            label: '三级 3-1-1'
-          }]
-        }, {
-          label: '二级 3-2',
-          children: [{
-            label: '三级 3-2-1'
-          }]
-        }]
+        id:'1',
+        label: '安全保卫处后勤管理处',
+        children: [
+          { id:'2',label: '田向阳'}
+        ]
+      }, {
+        id:'1',
+        label: '图书馆',
+        children: [
+          {
+            id:'1',
+            label: '一院区图书馆分管',
+            children: [
+              {id:'2',label: '陈献玲'}
+            ]
+          },
+          {
+          id:'1',
+            label: '二院区图书馆分管',
+            children: [
+              { id:'2',label: '张冬冬'}
+            ]
+          }
+        ]
+      },
+      {
+        id:'1',
+        label: '相关医学与管理系',
+        children: [
+          { id:'2',label: '张紫乐'}
+        ]
+      }, {
+        id:'1',
+        label: '护理系',
+        children: [
+          { id:'2',label: '崔志鹏'}
+
+        ]
+      }, {
+        id:'1',
+        label: '中药与康复系',
+        children: [
+          { id:'2',label: '刘洪玉'}
+
+        ]
       }],
       defaultProps: {
         children: 'children',
@@ -52,15 +102,36 @@ export default {
       }
     };
   },
-  methods: {
-    handleNodeClick(data) {
-      console.log(data);
+  watch: {
+    filterText(val) {
+      this.$refs.tree2.filter(val);
     }
+  },
+
+  methods: {
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.label.indexOf(value) !== -1;
+    },
+    handleNodeClick(data,node) {
+        if(!node.isLeaf == false)
+        this.$router.push('/toPersonal');
+      }
+
+  },
+  components: {
+    XHeader,
+    Swiper,
+    SwiperItem
+    
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.swiper-demo-img img {
+  width: 100%;
+}
 
 </style>

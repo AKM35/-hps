@@ -5,13 +5,19 @@ import Vue from 'vue'
 import App from './App'
 import 'assets/js/fastclick.js'
 import 'assets/css/normalize.css'
-import router from './router'
-import { Tree } from 'element-ui'
+import VueRouter from 'vue-router'
+import routers from './router'
+import { Tree, Input } from 'element-ui'
 import 'assets/css/common.css'
 
 window.FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.use(Tree)
+Vue.use(Input)
+const router = new VueRouter({
+  mode: 'history',
+  routes: routers
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
