@@ -10,7 +10,6 @@
   
     <el-tree class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode" ref="tree2" accordion highlight-current @node-click="handleNodeClick" :render-content="renderContent">
     </el-tree>
-  
   </page>
 </template>
 <script>
@@ -26,7 +25,6 @@ export default {
         { imgUrl: require('assets/images/3.jpg') }
       ],
       filterText: '',
-      name: '',
       data: [{
         id: '1',
         label: '团委',
@@ -119,7 +117,7 @@ export default {
     },
     renderContent(h, { node, data, store }) {
       if (node.isLeaf) {
-        debugger
+        
         return h('span', {
           'class': {
             'el-tree-node__label': true
@@ -176,27 +174,4 @@ export default {
   margin-top: 14px;
   right: 15px;
 }
-
-
-
-
-
-
-
-
-/* .judge .el-tree-node__expand-icon.is-leaf::before {
-  content: " ";
-  display: inline-block;
-  height: 6px;
-  width: 6px;
-  border-width: 2px 2px 0 0;
-  border-color: #c8c8cd;
-  border-style: solid;
-  -webkit-transform: matrix(.71, .71, -.71, .71, 0, 0);
-  transform: matrix(.71, .71, -.71, .71, 0, 0);
-  position: absolute;
-  top: 50%;
-  margin-top: -4px;
-  right: 2px;
-} */
 </style>

@@ -8,7 +8,7 @@ import 'assets/css/normalize.css'
 import components from 'components'
 import VueRouter from 'vue-router'
 import routers from './router'
-import { Tree, Input, Collapse, CollapseItem, Table, TableColumn } from 'element-ui'
+import { Tree, Input, Collapse, CollapseItem, Table, TableColumn, Radio, RadioGroup, Button } from 'element-ui'
 import 'assets/css/common.css'
 
 window.FastClick.attach(document.body)
@@ -20,6 +20,9 @@ Vue.use(CollapseItem)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(components)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Button)
 
 VueRouter.prototype.forward = function (location) {
   this.push(location)
