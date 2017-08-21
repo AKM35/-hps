@@ -53,7 +53,7 @@ export default {
       ]
     }
   },
-  mounted() {
+  activated() {
     this.label = this.$route.params.label
     console.log(this.label)
   },

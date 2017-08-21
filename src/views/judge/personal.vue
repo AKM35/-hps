@@ -30,35 +30,36 @@ export default {
       }
     }
   },
-  mounted() {
-    this.label = this.$route.params.label
-    console.log(this.label)
+  activated() {
+    if (this.$route.params.label) {
+      this.label = this.$route.params.label;
+    }
   },
   methods: {
     handleNodeClick(data, node) {
-      if(data.id == 1){
+      if (data.id == 1) {
         this.$router.forward({
-        name: "mutual",
-        params: {
-          label: data.label
-        }
-      })
-      }else if(data.id == 2){
+          name: "mutual",
+          params: {
+            label: data.label
+          }
+        })
+      } else if (data.id == 2) {
         this.$router.forward({
-        name: "satisfaction",
-        params: {
-          label: data.label
-        }
-      })
-      }else{
+          name: "satisfaction",
+          params: {
+            label: data.label
+          }
+        })
+      } else {
         this.$router.forward({
-        name: "score",
-        params: {
-          label: data.label
-        }
-      })
+          name: "score",
+          params: {
+            label: data.label
+          }
+        })
       }
-      
+
     },
     renderContent(h, { node, data, store }) {
       return h('span', {
@@ -87,6 +88,7 @@ export default {
 .evaluation-name {
   text-align: center;
 }
+
 .el-tree {
   border-bottom: none;
 }

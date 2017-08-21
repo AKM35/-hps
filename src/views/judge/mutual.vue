@@ -6,10 +6,9 @@
       <p class="title">{{item.title}}</p>
       <p class="content">{{item.content}}</p>
       <div class="radioList">
-        <el-radio-group v-model="radio">
-          <el-radio  v-for="(value,id) in item.fenshu" :key="id" :id="id" :label="id">{{value}}</el-radio>
-
-        </el-radio-group>
+        <checker v-model="item.radio" default-item-class="checker-item" selected-item-class="checker-item-selected">
+          <checker-item v-for="(it,i) in item.fenshu" :key="it.value" :value="it.value">{{it.caption}}</checker-item>
+        </checker>
       </div>
     </div>
     <div class="button">
@@ -19,35 +18,169 @@
 </template>
 
 <script>
-import { XHeader, XButton } from 'vux'
+import { XHeader, XButton, Checker, CheckerItem } from 'vux'
 
 export default {
   name: 'mutual',
   data() {
     return {
-      radio: '',
+
       label: '',
       defaultProps: {
         label: 'label'
       },
-      data: [
-        { title: '班级工作计划总结', content: '班级工作计划总结', fenshu: { excellent: "优(8分)", good: "良(6分)", fair: "中(4分)", poor: "差(0分)" } },
-        { title: '班会班干部会记录', content: '班会班干部会记录',fenshu: { excellent: "优(12分)", good: "良(8分)", fair: "中(4分)", poor: "差(0分)" } },
-        { title: '与任课老师、家长沟通', content: '与任课老师、家长沟通' ,fenshu: { excellent: "优(16分)", good: "良(12分)", fair: "中(8分)", poor: "差(0分)" }},
-        { title: '助进生教育转化', content: '助进生教育转化' ,fenshu: { excellent: "优(16分)", good: "良(12分)", fair: "中(8分)", poor: "差(0分)" }},
-        { title: '主题教育活动班级活动', content: '主题教育活动班级活动',fenshu: { excellent: "优(32分)", good: "良(24分)", fair: "中(16分)", poor: "差(4分)" } },
-        { title: '班级管理日志', content: '班级管理日志',fenshu: { excellent: "优(8分)", good: "良(6分)", fair: "中(4分)", poor: "差(0分)" } },
-        { title: '学生考评成绩公布', content: '学生考评成绩公布' ,fenshu: { excellent: "优(8分)", good: "良(6分)", fair: "中(4分)", poor: "差(0分)" }}
+      data: [{
+        radio: '',
+        title: '班级工作计划总结',
+        content: '班级工作计划总结',
+        fenshu: [
+          {
+            caption: "优(8分)",
+            value: "0"
+          }, {
+            caption: "优(8分)",
+            value: "1"
+          }, {
+            caption: "优(8分)",
+            value: "2"
+          }, {
+            caption: "优(8分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '班会班干部会记录',
+        content: '班会班干部会记录',
+        fenshu: [
+          {
+            caption: "优(12分)",
+            value: "0"
+          }, {
+            caption: "良(8分)",
+            value: "1"
+          }, {
+            caption: "中(4分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '与任课老师、家长沟通',
+        content: '与任课老师、家长沟通',
+        fenshu: [
+          {
+            caption: "优(16分)",
+            value: "0"
+          }, {
+            caption: "良(12分)",
+            value: "1"
+          }, {
+            caption: "中(8分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '助进生教育转化',
+        content: '助进生教育转化',
+        fenshu: [
+          {
+            caption: "优(12分)",
+            value: "0"
+          }, {
+            caption: "良(8分)",
+            value: "1"
+          }, {
+            caption: "中(4分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '主题教育活动班级活动',
+        content: '主题教育活动班级活动',
+        fenshu: [
+          {
+            caption: "优(12分)",
+            value: "0"
+          }, {
+            caption: "良(8分)",
+            value: "1"
+          }, {
+            caption: "中(4分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '班级管理日志',
+        content: '班级管理日志',
+        fenshu: [
+          {
+            caption: "优(12分)",
+            value: "0"
+          }, {
+            caption: "良(8分)",
+            value: "1"
+          }, {
+            caption: "中(4分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      },
+      {
+        radio: '',
+        title: '学生考评成绩公布',
+        content: '学生考评成绩公布',
+        fenshu: [
+          {
+            caption: "优(12分)",
+            value: "0"
+          }, {
+            caption: "良(8分)",
+            value: "1"
+          }, {
+            caption: "中(4分)",
+            value: "2"
+          }, {
+            caption: "差(0分)",
+            value: "3"
+          }
+        ]
+      }
       ]
     }
   },
-  mounted() {
+  activated() {
     this.label = this.$route.params.label
     console.log(this.label)
   },
   components: {
     XHeader,
-    XButton
+    XButton,
+    Checker,
+    CheckerItem
   }
 };
 </script>
@@ -79,6 +212,25 @@ export default {
 
 .button {
   margin-top: 10px;
+}
+
+
+
+.checker-item {
+  width: 67px;
+  height: 26px;
+  line-height: 26px;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-right: 6px;
+}
+
+.checker-item-selected {
+  background: #ffffff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACecocUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTZDOEJBQ0E3NkIxMTFFNEE3MzJFOUJCMEU5QUM0QkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTZDOEJBQ0I3NkIxMTFFNEE3MzJFOUJCMEU5QUM0QkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBNkM4QkFDODc2QjExMUU0QTczMkU5QkIwRTlBQzRCQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBNkM4QkFDOTc2QjExMUU0QTczMkU5QkIwRTlBQzRCQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PnMGp3kAAAAJUExURf9KAP///////4Jqdw0AAAADdFJOU///ANfKDUEAAAAuSURBVHjaTMpBDgAABAPB5f+PlhLUpZMWuQcYMWLEyDN4ymqa5KS4+3G+KAEGACQmAGlKzr56AAAAAElFTkSuQmCC) no-repeat right bottom;
+  border-color: #ff4a00;
 }
 </style>
 <style>
