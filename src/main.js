@@ -8,21 +8,18 @@ import 'assets/css/normalize.css'
 import components from 'components'
 import VueRouter from 'vue-router'
 import routers from './router'
-import { Tree, Input, Collapse, CollapseItem, Table, TableColumn, Radio, RadioGroup, Button } from 'element-ui'
+import { Tree, Input, Button } from 'element-ui'
 import 'assets/css/common.css'
+import { ConfirmPlugin, AlertPlugin } from 'vux'
 
 window.FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.use(Tree)
 Vue.use(Input)
-Vue.use(Collapse)
-Vue.use(CollapseItem)
-Vue.use(Table)
-Vue.use(TableColumn)
 Vue.use(components)
-Vue.use(Radio)
-Vue.use(RadioGroup)
 Vue.use(Button)
+Vue.use(ConfirmPlugin)
+Vue.use(AlertPlugin)
 
 VueRouter.prototype.forward = function (location) {
   this.push(location)

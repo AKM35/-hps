@@ -12,13 +12,13 @@
       </div>
     </div>
     <div class="button">
-      <x-button type="primary">保存</x-button>
+      <x-button type="primary" @click.native="showPlugin">保存</x-button>
     </div>
   </page>
 </template>
 
 <script>
-import { XHeader, XButton, Checker, CheckerItem } from 'vux'
+import { XHeader, XButton, Checker, CheckerItem, Alert } from 'vux'
 
 export default {
   name: 'mutual',
@@ -214,13 +214,37 @@ export default {
   },
   activated() {
     this.label = this.$route.params.label
-    console.log(this.label)
+    this.data.forEach(function (item, index) {
+      item.radio = ""
+    })
+  },
+  methods: {
+    showPlugin() {
+      var state = false
+      this.data.forEach(function (item, index) {
+        if (item.radio === "") {
+          state = true
+        }
+      })
+      if (state) {
+        this.$vux.alert.show({
+          title: '提示',
+          content: '您还有没选择的项目',
+        })
+      } else {
+        console.log("向服务器发送请求")
+        this.$router.back()
+      }
+
+
+    }
   },
   components: {
     XHeader,
     XButton,
     Checker,
-    CheckerItem
+    CheckerItem,
+    Alert
   }
 };
 </script>
@@ -271,15 +295,5 @@ export default {
   border-color: #ff4a00;
 }
 </style>
-<style>
-.mutual .el-radio__label {
-  font-size: 10px;
-  padding-left: 2px;
-}
 
-.mutual .el-radio__inner {
-  width: 12px;
-  height: 12px;
-}
-</style>
 
