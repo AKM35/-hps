@@ -6,7 +6,7 @@
       <p class="title">{{item.title}}</p>
       <p class="content">{{item.content}}</p>
       <div class="radioList">
-        <checker v-model="item.radio" default-item-class="checker-item" selected-item-class="checker-item-selected">
+        <checker v-model="item.radio" default-item-class="checker-item" selected-item-class="checker-item-selected" type="checkbox">
           <checker-item v-for="(it,i) in item.fenshu" :key="it.value" :value="it.value">{{it.caption}}</checker-item>
         </checker>
       </div>
