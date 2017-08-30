@@ -6,9 +6,9 @@
         <img :src="item.imgUrl">
       </swiper-item>
     </swiper>
-    <el-input placeholder="输入关键字进行查询" v-model="filterText"></el-input>
-  
-    <el-tree class="filter-tree" :data="data" :props="defaultProps" :filter-node-method="filterNode" ref="tree2" accordion highlight-current @node-click="handleNodeClick" :render-content="renderContent">
+    
+
+    <el-tree class="filter-tree" :data="data" :props="defaultProps"  ref="tree2" accordion highlight-current @node-click="handleNodeClick" :render-content="renderContent">
     </el-tree>
   </page>
 </template>
@@ -24,122 +24,67 @@ export default {
         { imgUrl: require('assets/images/2.jpg') },
         { imgUrl: require('assets/images/3.jpg') }
       ],
-      filterText: '',
       data: [{
         id: '1',
-        label: '团委',
-        children: [
-          { id: '2', label: '刘丽丽' },
-          { id: '2', label: '伍婷' }
-        ]
+        label: '三院区班主任/辅导员评优选先正式测评系统',
+        state:true
       }, {
-        id: '1',
-        label: '学生处',
-        children: [
-          { id: '2', label: '杨奕' },
-          { id: '2', label: '张子安' },
-          { id: '2', label: '袁惠莉' },
-          { id: '2', label: '谷敏' },
-        ]
+        id: '2',
+        label: '学生评教满意度测评项目test',
+        state:true
       }, {
-        id: '1',
-        label: '安全保卫处后勤管理处',
-        children: [
-          { id: '2', label: '田向阳' }
-        ]
+        id: '3',
+        label: '2016-2017学年班主任,辅导员满意度测评',
+        state:true
       }, {
-        id: '1',
-        label: '图书馆',
-        children: [
-          {
-            id: '1',
-            label: '一院区图书馆分管',
-            children: [
-              { id: '2', label: '陈献玲' }
-            ]
-          },
-          {
-            id: '1',
-            label: '二院区图书馆分管',
-            children: [
-              { id: '2', label: '张冬冬' }
-            ]
-          }
-        ]
-      },
-      {
-        id: '1',
-        label: '相关医学与管理系',
-        children: [
-          { id: '2', label: '张紫乐' }
-        ]
+        id: '4',
+        label: '中职 中药康复系 学工使用',
+        state:true
       }, {
-        id: '1',
-        label: '护理系',
-        children: [
-          { id: '2', label: '崔志鹏' }
-
-        ]
+        id: '5',
+        label: '二院区图书馆分管',
+        state:true
       }, {
-        id: '1',
-        label: '中药与康复系',
-        children: [
-          { id: '2', label: '刘洪玉' }
-
-        ]
+        id: '6',
+        label: '学生评教满意度测评项目',
+        state:true
+      }, {
+        id: '7',
+        label: '测试',
+        state:true
       }],
       defaultProps: {
         children: 'children',
-        label: 'label'
+        label: 'label',
       }
     };
   },
-  watch: {
-    filterText(val) {
-      this.$refs.tree2.filter(val);
-    }
-  },
   methods: {
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
-    },
     handleNodeClick(data, node) {
-      if (!node.isLeaf == false) {
+      if (data.state) {
         this.$router.forward({
-          name: "personal",
+          name: "section",
           params: {
-            label: data.label
+            id: data.id
           }
         })
       }
 
     },
     renderContent(h, { node, data, store }) {
-      if (node.isLeaf) {
-        
-        return h('span', {
-          'class': {
-            'el-tree-node__label': true
-          }, style: {
-            width: '100%'
-          }
-        }, [node.label,
-        h('a', {
-          'class': {
-            'tc-tree-node__label': true
-            
-          }
-        })
-          ])
-      } else {
-        return h('span', {
-          'class': {
-            'el-tree-node__label': true
-          }
-        }, node.label)
-      }
-
+      return h('span', {
+        'class': {
+          'el-tree-node__label': true
+        }, style: {
+          width: '100%'
+        }
+      }, [node.label,
+      h('a', {
+        'class': {
+          'tc-tree-node__label': true
+        }
+      })
+        ])
     }
   },
   components: {
@@ -160,7 +105,7 @@ export default {
 }
 </style>
 <style>
-.judge .is-expanded .tc-tree-node__label {
+.judge .tc-tree-node__label {
   content: " ";
   display: inline-block;
   height: 6px;
