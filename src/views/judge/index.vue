@@ -6,9 +6,8 @@
         <img :src="item.imgUrl">
       </swiper-item>
     </swiper>
-    
 
-    <el-tree class="filter-tree" :data="data" :props="defaultProps"  ref="tree2" accordion highlight-current @node-click="handleNodeClick" :render-content="renderContent">
+    <el-tree class="filter-tree" :data="data" :props="defaultProps" ref="tree2" accordion highlight-current @node-click="handleNodeClick" :render-content="renderContent">
     </el-tree>
   </page>
 </template>
@@ -27,31 +26,31 @@ export default {
       data: [{
         id: '1',
         label: '三院区班主任/辅导员评优选先正式测评系统',
-        state:true
+        state: true
       }, {
         id: '2',
         label: '学生评教满意度测评项目test',
-        state:true
+        state: true
       }, {
         id: '3',
         label: '2016-2017学年班主任,辅导员满意度测评',
-        state:true
+        state: true
       }, {
         id: '4',
         label: '中职 中药康复系 学工使用',
-        state:true
+        state: true
       }, {
         id: '5',
         label: '二院区图书馆分管',
-        state:true
+        state: true
       }, {
         id: '6',
         label: '学生评教满意度测评项目',
-        state:true
+        state: true
       }, {
         id: '7',
         label: '测试',
-        state:true
+        state: true
       }],
       defaultProps: {
         children: 'children',
@@ -60,7 +59,8 @@ export default {
     };
   },
   methods: {
-    handleNodeClick(data, node) {
+    handleNodeClick(data, node, component) {
+      
       if (data.state) {
         this.$router.forward({
           name: "section",
@@ -68,7 +68,11 @@ export default {
             id: data.id
           }
         })
+      } else{
+        if(data.label.indexOf('结束了') == -1)
+        data.label = data.label + '-结束了'
       }
+
 
     },
     renderContent(h, { node, data, store }) {
